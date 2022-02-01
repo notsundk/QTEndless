@@ -21,9 +21,12 @@ public class GameManager : MonoBehaviour
 
     int score = 0;
 
+    /////////////////////////////////////////
+
+    [Header("Public Game Elements")]
     public Text ScoreText;
 
-    // Button Reference
+    [Header("Button Display Reference")]
     public GameObject Pos1Up;
     public GameObject Pos1Down;
     public GameObject Pos1Left;
@@ -44,8 +47,18 @@ public class GameManager : MonoBehaviour
     public GameObject Pos4Left;
     public GameObject Pos4Right;
 
-    // Indicator Reference 
-    
+    [Header("Indicator Display Reference")]
+    public GameObject Pos1Checkmark;
+    public GameObject Pos2Checkmark;
+    public GameObject Pos3Checkmark;
+    public GameObject Pos4Checkmark;
+
+    [Header("Sound Source")]
+    public GameObject CorrectSound;
+    public GameObject InCorrectSound;
+    public GameObject AllCorrectSound;
+
+    /////////////////////////////////////////
 
     private void Awake()
     {
@@ -61,13 +74,14 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // Gameplay
-        sequenceDisplay();
-        playerControls();
-        updateScore();
-        timeLimit();
-        deathCheck();
+        sequenceDisplay();      //Display QTE Button Sequence
+        playerControls();       //Player Controls
+        updateScore();          //Update Score String
+        timeLimit();            //Time Limit per Sequence // Deals Damage
+        deathCheck();           //Check If Player is Dead
 
         // Debug Functions below, press...
+        SoundCheck();           //Q
         buttonDisplayCheck();   //A
         printCurrentPos();      //D
         printButtonSequence();  //F
@@ -216,21 +230,149 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
             {
                 Debug.Log("Correct Button Pressed! [Up Arrow]");
+                if (currentPos == 0)
+                {
+                    if (!incorrect)
+                    {
+                        Pos1Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 1)
+                {
+                    if (!incorrect)
+                    {
+                        Pos2Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 2)
+                {
+                    if (!incorrect)
+                    {
+                        Pos3Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 3)
+                {
+                    if (!incorrect)
+                    {
+                        Pos4Checkmark.SetActive(true);
+                        AllCorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
                 currentPos++;
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
             {
                 Debug.Log("Correct Button Pressed! [Down Arrow]");
+                if (currentPos == 0)
+                {
+                    if (!incorrect)
+                    {
+                        Pos1Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 1)
+                {
+                    if (!incorrect)
+                    {
+                        Pos2Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 2)
+                {
+                    if (!incorrect)
+                    {
+                        Pos3Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 3)
+                {
+                    if (!incorrect)
+                    {
+                        Pos4Checkmark.SetActive(true);
+                        AllCorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
                 currentPos++;
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
             {
                 Debug.Log("Correct Button Pressed! [Left Arrow]");
+                if (currentPos == 0)
+                {
+                    if (!incorrect)
+                    {
+                        Pos1Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 1)
+                {
+                    if (!incorrect)
+                    {
+                        Pos2Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 2)
+                {
+                    if (!incorrect)
+                    {
+                        Pos3Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 3)
+                {
+                    if (!incorrect)
+                    {
+                        Pos4Checkmark.SetActive(true);
+                        AllCorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
                 currentPos++;
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
             {
                 Debug.Log("Correct Button Pressed! [Right Arrow]");
+                if (currentPos == 0)
+                {
+                    if (!incorrect)
+                    {
+                        Pos1Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 1)
+                {
+                    if (!incorrect)
+                    {
+                        Pos2Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 2)
+                {
+                    if (!incorrect)
+                    {
+                        Pos3Checkmark.SetActive(true);
+                        CorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
+                else if (currentPos == 3)
+                {
+                    if (!incorrect)
+                    {
+                        Pos4Checkmark.SetActive(true);
+                        AllCorrectSound.GetComponent<AudioSource>().Play();
+                    }
+                }
                 currentPos++;
             }
             else if ( (Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.DownArrow)) || (Input.GetKeyDown(KeyCode.LeftArrow)) || (Input.GetKeyDown(KeyCode.RightArrow)) )
@@ -242,6 +384,15 @@ public class GameManager : MonoBehaviour
 
         if (incorrect) // Check if player is incorrect
         {
+            // Reset Indicator
+            Pos1Checkmark.SetActive(false);
+            Pos2Checkmark.SetActive(false);
+            Pos3Checkmark.SetActive(false);
+            Pos4Checkmark.SetActive(false);
+
+            // Sound
+            InCorrectSound.GetComponent<AudioSource>().Play();
+
             incorrect = false;
             currentPos = 0;
             Debug.Log("Incorrect, resetting currentPos to 0");
@@ -258,6 +409,11 @@ public class GameManager : MonoBehaviour
             currentPos = 0;
             resetSequence();
             Debug.Log("Score: " + score);
+
+            Pos1Checkmark.SetActive(false);
+            Pos2Checkmark.SetActive(false);
+            Pos3Checkmark.SetActive(false);
+            Pos4Checkmark.SetActive(false);
         }
     }
 
@@ -284,6 +440,15 @@ public class GameManager : MonoBehaviour
     }
 
     //////////// DEBUG ////////////
+
+    void SoundCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+            Debug.Log("Q Pressed, Play Sound");
+        }
+    }
 
     void buttonDisplayCheck()
     {
