@@ -24,33 +24,36 @@ public class GameManager : MonoBehaviour
     public Text ScoreText;
 
     // Button Reference
-    public GameObject Pos1Triangle;
-    public GameObject Pos1Square;
-    public GameObject Pos1Circle;
-    public GameObject Pos1Cross;
+    public GameObject Pos1Up;
+    public GameObject Pos1Down;
+    public GameObject Pos1Left;
+    public GameObject Pos1Right;
 
-    public GameObject Pos2Triangle;
-    public GameObject Pos2Square;
-    public GameObject Pos2Circle;
-    public GameObject Pos2Cross;
+    public GameObject Pos2Up;
+    public GameObject Pos2Down;
+    public GameObject Pos2Left;
+    public GameObject Pos2Right;
 
-    public GameObject Pos3Triangle;
-    public GameObject Pos3Square;
-    public GameObject Pos3Circle;
-    public GameObject Pos3Cross;
+    public GameObject Pos3Up;
+    public GameObject Pos3Down;
+    public GameObject Pos3Left;
+    public GameObject Pos3Right;
 
-    public GameObject Pos4Triangle;
-    public GameObject Pos4Square;
-    public GameObject Pos4Circle;
-    public GameObject Pos4Cross;
+    public GameObject Pos4Up;
+    public GameObject Pos4Down;
+    public GameObject Pos4Left;
+    public GameObject Pos4Right;
+
+    // Indicator Reference 
+    
 
     private void Awake()
     {
         // Adding buttons to button array
-        button[0] = "Triangle";
-        button[1] = "Square";
-        button[2] = "Circle";
-        button[3] = "Cross";
+        button[0] = "Up";
+        button[1] = "Down";
+        button[2] = "Left";
+        button[3] = "Right";
 
         resetSequence();    // Generating the First QTE Sequence
     }
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
         deathCheck();
 
         // Debug Functions below, press...
-        buttonCheck();          //A
+        buttonDisplayCheck();   //A
         printCurrentPos();      //D
         printButtonSequence();  //F
         resetPlayerScore();     //S
@@ -86,123 +89,123 @@ public class GameManager : MonoBehaviour
     void sequenceDisplay()
     {
         // Button Postion 1
-        if (buttonSequence[0] == "Triangle")
+        if (buttonSequence[0] == "Up")
         {
-            Pos1Triangle.SetActive(true);
-            Pos1Square.SetActive(false);
-            Pos1Circle.SetActive(false);
-            Pos1Cross.SetActive(false);
+            Pos1Up.SetActive(true);
+            Pos1Down.SetActive(false);
+            Pos1Left.SetActive(false);
+            Pos1Right.SetActive(false);
         }
-        else if (buttonSequence[0] == "Square")
+        else if (buttonSequence[0] == "Down")
         {
-            Pos1Triangle.SetActive(false);
-            Pos1Square.SetActive(true);
-            Pos1Circle.SetActive(false);
-            Pos1Cross.SetActive(false);
+            Pos1Up.SetActive(false);
+            Pos1Down.SetActive(true);
+            Pos1Left.SetActive(false);
+            Pos1Right.SetActive(false);
         }
-        else if (buttonSequence[0] == "Circle")
+        else if (buttonSequence[0] == "Left")
         {
-            Pos1Triangle.SetActive(false);
-            Pos1Square.SetActive(false);
-            Pos1Circle.SetActive(true);
-            Pos1Cross.SetActive(false);
+            Pos1Up.SetActive(false);
+            Pos1Down.SetActive(false);
+            Pos1Left.SetActive(true);
+            Pos1Right.SetActive(false);
         }
-        else if (buttonSequence[0] == "Cross")
+        else if (buttonSequence[0] == "Right")
         {
-            Pos1Triangle.SetActive(false);
-            Pos1Square.SetActive(false);
-            Pos1Circle.SetActive(false);
-            Pos1Cross.SetActive(true);
+            Pos1Up.SetActive(false);
+            Pos1Down.SetActive(false);
+            Pos1Left.SetActive(false);
+            Pos1Right.SetActive(true);
         }
 
         // Button Postion 2
-        if (buttonSequence[1] == "Triangle")
+        if (buttonSequence[1] == "Up")
         {
-            Pos2Triangle.SetActive(true);
-            Pos2Square.SetActive(false);
-            Pos2Circle.SetActive(false);
-            Pos2Cross.SetActive(false);
+            Pos2Up.SetActive(true);
+            Pos2Down.SetActive(false);
+            Pos2Left.SetActive(false);
+            Pos2Right.SetActive(false);
         }
-        else if (buttonSequence[1] == "Square")
+        else if (buttonSequence[1] == "Down")
         {
-            Pos2Triangle.SetActive(false);
-            Pos2Square.SetActive(true);
-            Pos2Circle.SetActive(false);
-            Pos2Cross.SetActive(false);
+            Pos2Up.SetActive(false);
+            Pos2Down.SetActive(true);
+            Pos2Left.SetActive(false);
+            Pos2Right.SetActive(false);
         }
-        else if (buttonSequence[1] == "Circle")
+        else if (buttonSequence[1] == "Left")
         {
-            Pos2Triangle.SetActive(false);
-            Pos2Square.SetActive(false);
-            Pos2Circle.SetActive(true);
-            Pos2Cross.SetActive(false);
+            Pos2Up.SetActive(false);
+            Pos2Down.SetActive(false);
+            Pos2Left.SetActive(true);
+            Pos2Right.SetActive(false);
         }
-        else if (buttonSequence[1] == "Cross")
+        else if (buttonSequence[1] == "Right")
         {
-            Pos2Triangle.SetActive(false);
-            Pos2Square.SetActive(false);
-            Pos2Circle.SetActive(false);
-            Pos2Cross.SetActive(true);
+            Pos2Up.SetActive(false);
+            Pos2Down.SetActive(false);
+            Pos2Left.SetActive(false);
+            Pos2Right.SetActive(true);
         }
 
         // Button Postion 3
-        if (buttonSequence[2] == "Triangle")
+        if (buttonSequence[2] == "Up")
         {
-            Pos3Triangle.SetActive(true);
-            Pos3Square.SetActive(false);
-            Pos3Circle.SetActive(false);
-            Pos3Cross.SetActive(false);
+            Pos3Up.SetActive(true);
+            Pos3Down.SetActive(false);
+            Pos3Left.SetActive(false);
+            Pos3Right.SetActive(false);
         }
-        else if (buttonSequence[2] == "Square")
+        else if (buttonSequence[2] == "Down")
         {
-            Pos3Triangle.SetActive(false);
-            Pos3Square.SetActive(true);
-            Pos3Circle.SetActive(false);
-            Pos3Cross.SetActive(false);
+            Pos3Up.SetActive(false);
+            Pos3Down.SetActive(true);
+            Pos3Left.SetActive(false);
+            Pos3Right.SetActive(false);
         }
-        else if (buttonSequence[2] == "Circle")
+        else if (buttonSequence[2] == "Left")
         {
-            Pos3Triangle.SetActive(false);
-            Pos3Square.SetActive(false);
-            Pos3Circle.SetActive(true);
-            Pos3Cross.SetActive(false);
+            Pos3Up.SetActive(false);
+            Pos3Down.SetActive(false);
+            Pos3Left.SetActive(true);
+            Pos3Right.SetActive(false);
         }
-        else if (buttonSequence[2] == "Cross")
+        else if (buttonSequence[2] == "Right")
         {
-            Pos3Triangle.SetActive(false);
-            Pos3Square.SetActive(false);
-            Pos3Circle.SetActive(false);
-            Pos3Cross.SetActive(true);
+            Pos3Up.SetActive(false);
+            Pos3Down.SetActive(false);
+            Pos3Left.SetActive(false);
+            Pos3Right.SetActive(true);
         }
 
         // Button Postion 4
-        if (buttonSequence[3] == "Triangle")
+        if (buttonSequence[3] == "Up")
         {
-            Pos4Triangle.SetActive(true);
-            Pos4Square.SetActive(false);
-            Pos4Circle.SetActive(false);
-            Pos4Cross.SetActive(false);
+            Pos4Up.SetActive(true);
+            Pos4Down.SetActive(false);
+            Pos4Left.SetActive(false);
+            Pos4Right.SetActive(false);
         }
-        else if (buttonSequence[3] == "Square")
+        else if (buttonSequence[3] == "Down")
         {
-            Pos4Triangle.SetActive(false);
-            Pos4Square.SetActive(true);
-            Pos4Circle.SetActive(false);
-            Pos4Cross.SetActive(false);
+            Pos4Up.SetActive(false);
+            Pos4Down.SetActive(true);
+            Pos4Left.SetActive(false);
+            Pos4Right.SetActive(false);
         }
-        else if (buttonSequence[3] == "Circle")
+        else if (buttonSequence[3] == "Left")
         {
-            Pos4Triangle.SetActive(false);
-            Pos4Square.SetActive(false);
-            Pos4Circle.SetActive(true);
-            Pos4Cross.SetActive(false);
+            Pos4Up.SetActive(false);
+            Pos4Down.SetActive(false);
+            Pos4Left.SetActive(true);
+            Pos4Right.SetActive(false);
         }
-        else if (buttonSequence[3] == "Cross")
+        else if (buttonSequence[3] == "Right")
         {
-            Pos4Triangle.SetActive(false);
-            Pos4Square.SetActive(false);
-            Pos4Circle.SetActive(false);
-            Pos4Cross.SetActive(true);
+            Pos4Up.SetActive(false);
+            Pos4Down.SetActive(false);
+            Pos4Left.SetActive(false);
+            Pos4Right.SetActive(true);
         }
     }   // "your method is repulsive", "put the shapes into a list" - Champ
 
@@ -210,24 +213,24 @@ public class GameManager : MonoBehaviour
     {
         if (!incorrect) // Check if player is NOT incorrect
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Triangle")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
+            if (Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
             {
-                Debug.Log("Correct Button Pressed! Triangle (Up Arrow)");
+                Debug.Log("Correct Button Pressed! [Up Arrow]");
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Square")
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
             {
-                Debug.Log("Correct Button Pressed! Square (Down Arrow)");
+                Debug.Log("Correct Button Pressed! [Down Arrow]");
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Circle")
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
             {
-                Debug.Log("Correct Button Pressed! Circle (Left Arrow)");
+                Debug.Log("Correct Button Pressed! [Left Arrow]");
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Cross")
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
             {
-                Debug.Log("Correct Button Pressed! Cross (Right Arrow)");
+                Debug.Log("Correct Button Pressed! [Right Arrow]");
                 currentPos++;
             }
             else if ( (Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.DownArrow)) || (Input.GetKeyDown(KeyCode.LeftArrow)) || (Input.GetKeyDown(KeyCode.RightArrow)) )
@@ -282,11 +285,11 @@ public class GameManager : MonoBehaviour
 
     //////////// DEBUG ////////////
 
-    void buttonCheck()
+    void buttonDisplayCheck()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Pos1Circle.SetActive(true);
+            Pos1Up.SetActive(true);
         }
     }
 

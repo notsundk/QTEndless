@@ -2028,22 +2028,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonSequence: []
   ScoreText: {fileID: 1740412774}
-  Pos1Triangle: {fileID: 641093334}
-  Pos1Square: {fileID: 2105454881}
-  Pos1Circle: {fileID: 1105845041}
-  Pos1Cross: {fileID: 1820884480}
-  Pos2Triangle: {fileID: 1467391552}
-  Pos2Square: {fileID: 567357821}
-  Pos2Circle: {fileID: 997074195}
-  Pos2Cross: {fileID: 1938854848}
-  Pos3Triangle: {fileID: 1373307302}
-  Pos3Square: {fileID: 1403772044}
-  Pos3Circle: {fileID: 1467356294}
-  Pos3Cross: {fileID: 1297337308}
-  Pos4Triangle: {fileID: 1820519104}
-  Pos4Square: {fileID: 147297981}
-  Pos4Circle: {fileID: 514543242}
-  Pos4Cross: {fileID: 1659065862}
+  Pos1Up: {fileID: 641093334}
+  Pos1Down: {fileID: 2105454881}
+  Pos1Left: {fileID: 1105845041}
+  Pos1Right: {fileID: 1820884480}
+  Pos2Up: {fileID: 1467391552}
+  Pos2Down: {fileID: 567357821}
+  Pos2Left: {fileID: 997074195}
+  Pos2Right: {fileID: 1938854848}
+  Pos3Up: {fileID: 1373307302}
+  Pos3Down: {fileID: 1403772044}
+  Pos3Left: {fileID: 1467356294}
+  Pos3Right: {fileID: 1297337308}
+  Pos4Up: {fileID: 1820519104}
+  Pos4Down: {fileID: 147297981}
+  Pos4Left: {fileID: 514543242}
+  Pos4Right: {fileID: 1659065862}
 --- !u!212 &1591315302
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2365,7 +2365,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: c65532980deac054e960c202e21aac53, type: 3}
-  m_Color: {r: 0.1992257, g: 0.3461223, b: 0.3490566, a: 1}
+  m_Color: {r: 0.38972944, g: 0.5430266, b: 0.5471698, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
