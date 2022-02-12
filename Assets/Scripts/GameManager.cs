@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,15 +16,23 @@ public class GameManager : MonoBehaviour
     int finalPos = 4;       // there are 4 button in a sequence, so going to the "next" button after 4 should score. 
     bool incorrect = false;
 
-    int health = 3;         // The player have 3 hp.
-    float maxTime = 5;      // In seconds, the time the player have to input the sequence correctly.
-    float damageTime = 0;   // If maxTime = damageTime, then health - 1.
-
     int score = 0;
 
-    /////////////////////////////////////////
+    ///////////////////////////////////////// Combo Timer
 
-    [Header("Public Game Elements")]
+    [Header("Combo Game Elements")]
+    int Multiplier = 1;
+    public Text ComboText;
+
+    public float TimeRemaining;
+    float StartingTime;
+    float StartingScale;
+    public RectTransform TimerBar;
+    public Image bar;
+
+    ///////////////////////////////////////// Graphical Elements
+
+    [Header("Score Text Elements")]
     public Text ScoreText;
 
     [Header("Button Display Reference")]
@@ -68,6 +77,9 @@ public class GameManager : MonoBehaviour
         button[2] = "Left";
         button[3] = "Right";
 
+        StartingTime = TimeRemaining;
+        StartingScale = TimerBar.localScale.x;
+
         resetSequence();    // Generating the First QTE Sequence
     }
 
@@ -77,8 +89,8 @@ public class GameManager : MonoBehaviour
         sequenceDisplay();      //Display QTE Button Sequence
         playerControls();       //Player Controls
         updateScore();          //Update Score String
-        timeLimit();            //Time Limit per Sequence // Deals Damage
-        deathCheck();           //Check If Player is Dead
+        updateCombo();
+        Restart();
 
         // Debug Functions below, press...
         SoundCheck();           //Q
@@ -393,9 +405,31 @@ public class GameManager : MonoBehaviour
             // Sound
             InCorrectSound.GetComponent<AudioSource>().Play();
 
+            // Punishment
+            Multiplier = 1;
             incorrect = false;
             currentPos = 0;
             Debug.Log("Incorrect, resetting currentPos to 0");
+        }
+    }
+
+    void updateCombo()
+    {
+        ComboText.text = Multiplier.ToString();
+
+        if (TimeRemaining > 0)
+        {
+            float Scale = (TimeRemaining / StartingTime);
+            float NewXScale = StartingScale * Scale;
+            TimerBar.localScale = new Vector2(NewXScale, 1);
+            TimeRemaining -= Time.deltaTime;
+        }
+
+        if (TimeRemaining <= 0)
+        {
+            Multiplier = 1;
+            TimeRemaining = StartingTime;
+            Debug.Log("Time out! New QTE Sequence Genereted!");
         }
     }
 
@@ -405,7 +439,9 @@ public class GameManager : MonoBehaviour
 
         if (currentPos == finalPos)
         {
-            score++;
+            TimeRemaining = StartingTime;
+            Multiplier += 1;
+            score += Multiplier;
             currentPos = 0;
             resetSequence();
             Debug.Log("Score: " + score);
@@ -417,25 +453,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void timeLimit()
+    void Restart()
     {
-        // Timer insert here
-
-        if (maxTime == damageTime)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            resetSequence();
-            maxTime = 5;
-            health--;
-            currentPos = 0;
-            Debug.Log("Time out! New QTE Sequence Genereted!");
-        }
-    }
-
-    void deathCheck()
-    {
-        if (health == 0)
-        {
-            Debug.Log("Game Over!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Restart");
         }
     }
 
