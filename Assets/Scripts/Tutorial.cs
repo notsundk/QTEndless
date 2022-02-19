@@ -14,12 +14,6 @@ public class Tutorial : MonoBehaviour
     int finalPos = 4;       // there are 4 button in a sequence, so going to the "next" button after 4 should score. 
     bool incorrect = false;
 
-    int health = 3;         // The player have 3 hp.
-    float maxTime = 5;      // In seconds, the time the player have to input the sequence correctly.
-    float damageTime = 0;   // If maxTime = damageTime, then health - 1.
-
-    int score = 0;
-
     /////////////////////////////////////////
 
     [Header("Button Display Reference")]

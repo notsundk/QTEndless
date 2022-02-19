@@ -1,8 +1,9 @@
-using System.Collections;
+using System.Collections;               // What is this for?
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;      // For Changing Scenes
+using TMPro;                            // For Text Mesh Pro
 
 public class GameManager : MonoBehaviour
 {
@@ -14,15 +15,15 @@ public class GameManager : MonoBehaviour
 
     int currentPos = 0;     // If currentPos = finalPos, then player score
     int finalPos = 4;       // there are 4 button in a sequence, so going to the "next" button after 4 should score. 
-    bool incorrect = false;
+    bool incorrect = false; // (incorrect = false) == correct
 
-    int score = 0;
+    public int score = 0;
 
     ///////////////////////////////////////// Combo Timer
 
     [Header("Combo Game Elements")]
-    int Multiplier = 1;
-    public Text ComboText;
+    int Multiplier = 0;
+    public TextMeshPro ComboText;
 
     public float TimeRemaining;
     float StartingTime;
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     ///////////////////////////////////////// Graphical Elements
 
     [Header("Score Text Elements")]
-    public Text ScoreText;
+    public TextMeshPro ScoreText;
 
     [Header("Button Display Reference")]
     public GameObject Pos1Up;
@@ -83,6 +84,11 @@ public class GameManager : MonoBehaviour
         resetSequence();    // Generating the First QTE Sequence
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         // Gameplay
@@ -93,12 +99,12 @@ public class GameManager : MonoBehaviour
         Restart();
 
         // Debug Functions below, press...
-        SoundCheck();           //Q
-        buttonDisplayCheck();   //A
-        printCurrentPos();      //D
-        printButtonSequence();  //F
-        resetPlayerScore();     //S
-        resetButtonSequence();  //Space
+        //SoundCheck();           //Q
+        //buttonDisplayCheck();   //A
+        //printCurrentPos();      //D
+        //printButtonSequence();  //F
+        //resetPlayerScore();     //S
+        //resetButtonSequence();  //Space
     }
 
     void resetSequence() // Resets Button Sequence List
@@ -108,7 +114,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < sequenceLength; i++)
         {
             buttonSequence.Add(button[Random.Range(0, 4)]);
-            Debug.Log(buttonSequence[i]);
+            //Debug.Log(buttonSequence[i]);
         }
     }
 
@@ -406,14 +412,14 @@ public class GameManager : MonoBehaviour
             InCorrectSound.GetComponent<AudioSource>().Play();
 
             // Punishment
-            Multiplier = 1;
+            Multiplier = 0;
             incorrect = false;
             currentPos = 0;
             Debug.Log("Incorrect, resetting currentPos to 0");
         }
     }
 
-    void updateCombo()
+    void updateCombo()  // Update Combo Timer
     {
         ComboText.text = Multiplier.ToString();
 
@@ -427,7 +433,7 @@ public class GameManager : MonoBehaviour
 
         if (TimeRemaining <= 0)
         {
-            Multiplier = 1;
+            Multiplier = 0;
             TimeRemaining = StartingTime;
             Debug.Log("Time out! New QTE Sequence Genereted!");
         }
@@ -440,8 +446,18 @@ public class GameManager : MonoBehaviour
         if (currentPos == finalPos)
         {
             TimeRemaining = StartingTime;
-            Multiplier += 1;
-            score += Multiplier;
+
+            if (Multiplier == 0)
+            {
+                score += 1;
+                Multiplier += 1;
+            }
+            else
+            {
+                score += Multiplier;
+                Multiplier += 1;
+            }
+
             currentPos = 0;
             resetSequence();
             Debug.Log("Score: " + score);
@@ -464,61 +480,61 @@ public class GameManager : MonoBehaviour
 
     //////////// DEBUG ////////////
 
-    void SoundCheck()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            gameObject.GetComponent<AudioSource>().Play();
-            Debug.Log("Q Pressed, Play Sound");
-        }
-    }
+    //void SoundCheck()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Q))
+    //    {
+    //        gameObject.GetComponent<AudioSource>().Play();
+    //        Debug.Log("Q Pressed, Play Sound");
+    //    }
+    //}
 
-    void buttonDisplayCheck()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Pos1Up.SetActive(true);
-        }
-    }
+    //void buttonDisplayCheck()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        Pos1Up.SetActive(true);
+    //    }
+    //}
 
-    void printCurrentPos()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("D Pressed, Current Pos: " + currentPos);
-        }
-    }
+    //void printCurrentPos()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.D))
+    //    {
+    //        Debug.Log("D Pressed, Current Pos: " + currentPos);
+    //    }
+    //}
 
-    void printButtonSequence()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("F Pressed, Printing QTE Button Sequence");
+    //void printButtonSequence()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        Debug.Log("F Pressed, Printing QTE Button Sequence");
 
-            for (int i = 0; i < sequenceLength; i++)
-            {
-                Debug.Log(buttonSequence[i]);
-            }
-        }
-    }
+    //        for (int i = 0; i < sequenceLength; i++)
+    //        {
+    //            Debug.Log(buttonSequence[i]);
+    //        }
+    //    }
+    //}
 
-    void resetPlayerScore()
-    {
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("S Pressed, Reset Player Score");
-                score = 0;
-            }
-        }
-    }
+    //void resetPlayerScore()
+    //{
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.S))
+    //        {
+    //            Debug.Log("S Pressed, Reset Player Score");
+    //            score = 0;
+    //        }
+    //    }
+    //}
 
-    void resetButtonSequence()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Space Pressed, Reset QTE Button Sequence");
-            resetSequence();
-        }
-    }
+    //void resetButtonSequence()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Debug.Log("Space Pressed, Reset QTE Button Sequence");
+    //        resetSequence();
+    //    }
+    //}
 }

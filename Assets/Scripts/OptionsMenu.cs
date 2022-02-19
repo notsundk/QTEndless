@@ -26,8 +26,6 @@ public class OptionsMenu : MonoBehaviour
             case false: 
                 Mixer.SetFloat("Volume", Slide.value);
                 break;
-            default:
-                break;
         }
     }
 }

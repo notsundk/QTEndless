@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -11,6 +11,11 @@ public class Timer : MonoBehaviour
     float StartingScale;
     public RectTransform TimerBar;
     public Image bar;
+
+    ////////////////Other Scripts
+
+    public GameManager GameManager;
+    public ScoreManager ScoreManager;
 
     void Start()
     {
@@ -30,7 +35,11 @@ public class Timer : MonoBehaviour
 
         if (TimeRemaining <= 0) //TimeRemaining less than or equal to 0.
         {
-            Debug.LogWarning("Game Over");  
+            int finalScore = GameManager.score;         // From GameManager
+            ScoreManager.UpdateScore(finalScore);       // Sent to ScoreManager
+
+            Debug.LogWarning("Game Over");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
