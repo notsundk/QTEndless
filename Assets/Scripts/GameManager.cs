@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
     public GameObject AllCorrectSound;
 
     /////////////////////////////////////////
+    //Other Scripts
+
+    public Timer Timer;
 
     private void Awake()
     {
@@ -86,25 +89,29 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
-        // Gameplay
-        sequenceDisplay();      //Display QTE Button Sequence
-        playerControls();       //Player Controls
-        updateScore();          //Update Score String
-        updateCombo();
-        Restart();
+            // Gameplay
+            sequenceDisplay();      //Display QTE Button Sequence
+            playerControls();       //Player Controls
+            updateScore();          //Update Score String
+            updateCombo();          //Update Combo String
+            Restart();              //Quick Restart
 
-        // Debug Functions below, press...
-        //SoundCheck();           //Q
-        //buttonDisplayCheck();   //A
-        //printCurrentPos();      //D
-        //printButtonSequence();  //F
-        //resetPlayerScore();     //S
-        //resetButtonSequence();  //Space
+            // Debug Functions below, press...
+            //SoundCheck();           //Q
+            //buttonDisplayCheck();   //A
+            //printCurrentPos();      //D
+            //printButtonSequence();  //F
+            //resetPlayerScore();     //S
+            //resetButtonSequence();  //Space
+
+            // Cheats
+            ComboDrainToggle();
+            resetButtonSequence();
     }
 
     void resetSequence() // Resets Button Sequence List
@@ -245,7 +252,7 @@ public class GameManager : MonoBehaviour
     {
         if (!incorrect) // Check if player is NOT incorrect
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
+            if (Input.GetKeyDown(KeyCode.W) && buttonSequence[currentPos] == "Up" || Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
             {
                 Debug.Log("Correct Button Pressed! [Up Arrow]");
                 if (currentPos == 0)
@@ -282,7 +289,7 @@ public class GameManager : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
+            else if (Input.GetKeyDown(KeyCode.S) && buttonSequence[currentPos] == "Down" || Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
             {
                 Debug.Log("Correct Button Pressed! [Down Arrow]");
                 if (currentPos == 0)
@@ -319,7 +326,7 @@ public class GameManager : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
+            else if (Input.GetKeyDown(KeyCode.A) && buttonSequence[currentPos] == "Left" || Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
             {
                 Debug.Log("Correct Button Pressed! [Left Arrow]");
                 if (currentPos == 0)
@@ -356,7 +363,7 @@ public class GameManager : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
+            else if (Input.GetKeyDown(KeyCode.D) && buttonSequence[currentPos] == "Right" || Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
             {
                 Debug.Log("Correct Button Pressed! [Right Arrow]");
                 if (currentPos == 0)
@@ -393,7 +400,7 @@ public class GameManager : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if ( (Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.DownArrow)) || (Input.GetKeyDown(KeyCode.LeftArrow)) || (Input.GetKeyDown(KeyCode.RightArrow)) )
+            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Debug.Log("Wrong Button Pressed!");
                 incorrect = true;
@@ -423,19 +430,22 @@ public class GameManager : MonoBehaviour
     {
         ComboText.text = Multiplier.ToString();
 
-        if (TimeRemaining > 0)
+        if (!ComboDrain)
         {
-            float Scale = (TimeRemaining / StartingTime);
-            float NewXScale = StartingScale * Scale;
-            TimerBar.localScale = new Vector2(NewXScale, 1);
-            TimeRemaining -= Time.deltaTime;
-        }
+            if (TimeRemaining > 0)
+            {
+                float Scale = (TimeRemaining / StartingTime);
+                float NewXScale = StartingScale * Scale;
+                TimerBar.localScale = new Vector2(NewXScale, 1);
+                TimeRemaining -= Time.deltaTime;
+            }
 
-        if (TimeRemaining <= 0)
-        {
-            Multiplier = 0;
-            TimeRemaining = StartingTime;
-            Debug.Log("Time out! New QTE Sequence Genereted!");
+            if (TimeRemaining <= 0)
+            {
+                Multiplier = 0;
+                TimeRemaining = StartingTime;
+                Debug.Log("Time out! New QTE Sequence Genereted!");
+            }
         }
     }
 
@@ -475,6 +485,39 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Restart");
+        }
+    }
+
+    //////////// CHEATS ////////////
+
+    bool ComboDrain = false;
+
+    void ComboDrainToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            //if (!ComboDrain)    // Turn on Combo Drain
+            //{
+            //    ComboDrain = true;
+            //    Debug.Log("Combo WILL Drain");
+            //    return;
+            //}
+            //if (ComboDrain)     // Turn off Combo Drain
+            //{
+            //    ComboDrain = !true;
+            //    Debug.Log("Combo WON'T Drain");
+            //    return;
+            //}
+
+            ComboDrain = !ComboDrain;
+        }
+    }
+
+    void resetButtonSequence()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            resetSequence();
         }
     }
 

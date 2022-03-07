@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Timer : MonoBehaviour
 {
@@ -25,6 +26,26 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        TimerToggle();
+
+        startGameTimer();
+
+        if (startGame)
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                ResetTime();    // Resets to 40 seconds.
+            }
+
+            if (TimerCountDown) // Timer Pause Cheat [Toggle]
+            {
+                CountDownTimer();
+            }
+        }
+    }
+
+    public void CountDownTimer()
+    {
         if (TimeRemaining > 0)  //TimeRemaining more than 0.
         {
             float Scale = (TimeRemaining / StartingTime);    //To get the Scale of the TimerBar. Notes: 10/10 = 1, 5/10 = 0.5, 0/10 = 0, etc. (You get ratios).
@@ -40,6 +61,38 @@ public class Timer : MonoBehaviour
 
             Debug.LogWarning("Game Over");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    //Cheats
+    public void ResetTime()
+    {
+        TimeRemaining = 40.0f;
+    }
+
+    bool TimerCountDown = true;
+
+    public void TimerToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TimerCountDown = !TimerCountDown;
+            Debug.Log("Timer Count down: " + TimerCountDown);
+        }
+    }
+
+    bool startGame = false;
+    float startTimer = 2.0f;
+
+    void startGameTimer()
+    {
+        startTimer -= Time.deltaTime;
+
+        Debug.Log(startTimer);
+
+        if (startTimer <= 0)
+        {
+            startGame = true;
         }
     }
 }

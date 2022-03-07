@@ -213,7 +213,7 @@ public class Tutorial : MonoBehaviour
     {
         if (!incorrect) // Check if player is NOT incorrect
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
+            if (Input.GetKeyDown(KeyCode.W) && buttonSequence[currentPos] == "Up" || Input.GetKeyDown(KeyCode.UpArrow) && buttonSequence[currentPos] == "Up")       // Check if Triangle button is pressed && button in the currentPos of the button Sequence = Triangle, then currentPos + 1
             {
                 Debug.Log("Correct Button Pressed! [Up Arrow]");
                 if (currentPos == 0)
@@ -250,7 +250,7 @@ public class Tutorial : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
+            else if (Input.GetKeyDown(KeyCode.S) && buttonSequence[currentPos] == "Down" || Input.GetKeyDown(KeyCode.DownArrow) && buttonSequence[currentPos] == "Down")
             {
                 Debug.Log("Correct Button Pressed! [Down Arrow]");
                 if (currentPos == 0)
@@ -287,7 +287,7 @@ public class Tutorial : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
+            else if (Input.GetKeyDown(KeyCode.A) && buttonSequence[currentPos] == "Left" || Input.GetKeyDown(KeyCode.LeftArrow) && buttonSequence[currentPos] == "Left")
             {
                 Debug.Log("Correct Button Pressed! [Left Arrow]");
                 if (currentPos == 0)
@@ -324,7 +324,7 @@ public class Tutorial : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
+            else if (Input.GetKeyDown(KeyCode.D) && buttonSequence[currentPos] == "Right" || Input.GetKeyDown(KeyCode.RightArrow) && buttonSequence[currentPos] == "Right")
             {
                 Debug.Log("Correct Button Pressed! [Right Arrow]");
                 if (currentPos == 0)
@@ -361,14 +361,13 @@ public class Tutorial : MonoBehaviour
                 }
                 currentPos++;
             }
-            else if ((Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.DownArrow)) || (Input.GetKeyDown(KeyCode.LeftArrow)) || (Input.GetKeyDown(KeyCode.RightArrow)))
+            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Debug.Log("Wrong Button Pressed!");
                 incorrect = true;
             }
         }
-
-        if (incorrect) // Check if player is incorrect
+        else // Check if player is incorrect  // use else if there is only 2 outcomes (for bool stuff)
         {
             // Reset Indicator
             Pos1Checkmark.SetActive(false);

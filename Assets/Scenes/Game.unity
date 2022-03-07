@@ -951,7 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b099dfbba4cb469c88ad6f9ad0e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeRemaining: 10
+  TimeRemaining: 40
   TimerBar: {fileID: 775424175}
   bar: {fileID: 775424176}
   GameManager: {fileID: 1591315301}
@@ -2511,7 +2511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -105.7}
+  m_AnchoredPosition: {x: 0, y: -105.70001}
   m_SizeDelta: {x: 676.67, y: 101.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269620147
@@ -3244,6 +3244,7 @@ MonoBehaviour:
   CorrectSound: {fileID: 580736598}
   InCorrectSound: {fileID: 1491554839}
   AllCorrectSound: {fileID: 1681203429}
+  Timer: {fileID: 0}
 --- !u!212 &1591315302
 SpriteRenderer:
   m_ObjectHideFlags: 0
